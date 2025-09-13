@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eksplorasi Minat Kerjaya STEM</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@300;400;500;600;700&display=swap');
+        
+        body {
+            font-family: 'Fredoka', sans-serif;
+        }
+        
+        .book-page {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+        
+        .story-content {
+            background: #fff;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+        
+        .tab-active {
+            background: linear-gradient(135deg, #ff6b6b, #ffa500);
+            color: white;
+            transform: translateY(-2px);
+        }
+        
+        .category-card {
+            transition: all 0.3s ease;
+        }
+        
+        .category-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+        }
+        
+        .story-card {
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .story-card:hover {
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+<body class="book-page">
+    <div class="container mx-auto px-4 py-8">
+        <!-- Header -->
+        <div class="text-center mb-8">
+            <h1 class="text-5xl font-bold text-white mb-4">📚 EKSPLORASI MINAT KERJAYA STEM 🚀</h1>
+            <p class="text-xl text-white opacity-90">Jom belajar sains dengan cara yang menyeronokkan!</p>
+        </div>
+
+        <!-- Main Content Area -->
+        <div id="mainContent" class="story-content p-8">
+            <!-- Level Selection (Initial View) -->
+            <div id="levelSelection" class="text-center">
+                <h2 class="text-3xl font-bold text-gray-800 mb-8">Pilih Tahap Anda</h2>
+                <div class="grid md:grid-cols-3 gap-6">
+                    <button onclick="showCategories('junior')" class="level-btn bg-gradient-to-br from-green-400 to-blue-500 text-white p-8 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105">
+                        <div class="text-6xl mb-4">🌱</div>
+                        <h3 class="text-2xl font-bold">STEM JUNIOR</h3>
+                        <p class="text-sm opacity-90 mt-2">Untuk pemula yang ingin tahu</p>
+                    </button>
+                    
+                    <button onclick="showCategories('intermediate')" class="level-btn bg-gradient-to-br from-purple-400 to-pink-500 text-white p-8 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105">
+                        <div class="text-6xl mb-4">🌟</div>
+                        <h3 class="text-2xl font-bold">STEM INTERMEDIATE</h3>
+                        <p class="text-sm opacity-90 mt-2">Untuk yang sudah biasa</p>
+                    </button>
+                    
+                    <button onclick="showCategories('senior')" class="level-btn bg-gradient-to-br from-orange-400 to-red-500 text-white p-8 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105">
+                        <div class="text-6xl mb-4">🏆</div>
+                        <h3 class="text-2xl font-bold">STEM SENIOR</h3>
+                        <p class="text-sm opacity-90 mt-2">Untuk pakar cilik</p>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Category Selection -->
+            <div id="categorySelection" class="hidden">
+                <div class="flex items-center justify-between mb-6">
+                    <button onclick="showLevelSelection()" class="bg-gray-500 text-white px-4 py-2 rounded-lg hover:bg-gray-600 transition-colors">
+                        ← Kembali
+                    </button>
+                    <h2 id="categoryTitle" class="text-3xl font-bold text-gray-800"></h2>
+                    <div></div>
+                </div>
+                
+                <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <div onclick="showStories('science')" class="category-card bg-gradient-to-br from-blue-400 to-blue-600 text-white p-6 rounded-2xl shadow-lg cursor-pointer">
+                        <div class="text-5xl mb-4 text-center">🔬</div>
+                        <h3 class="text-xl font-bold text-center">SCIENCE</h3>
+                        <p class="text-sm opacity-90 text-center mt-2">Sains yang menarik</p>
+                    </div>
+                    
+                    <div onclick="showStories('technology')" class="category-card bg-gradient-to-br from-green-400 to-green-600 text-white p-6 rounded-2xl shadow-lg cursor-pointer">
+                        <div class="text-5xl mb-4 text-center">💻</div>
+                        <h3 class="text-xl font-bold text-center">TECHNOLOGY</h3>
+                        <p class="text-sm opacity-90 text-center mt-2">Teknologi masa depan</p>
+                    </div>
+                    
+                    <div onclick="showStories('engineering')" class="category-card bg-gradient-to-br from-purple-400 to-purple-600 text-white p-6 rounded-2xl shadow-lg cursor-pointer">
+                        <div class="text-5xl mb-4 text-center">⚙️</div>
+                        <h3 class="text-xl font-bold text-center">ENGINEERING</h3>
+                        <p class="text-sm opacity-90 text-center mt-2">Kejuruteraan kreatif</p>
+                    </div>
+                    
+                    <div onclick="showStories('mathematics')" class="category-card bg-gradient-to-br from-orange-400 to-orange-600 text-white p-6 rounded-2xl shadow-lg cursor-pointer">
+                        <div class="text-5xl mb-4 text-center">🔢</div>
+                        <h3 class="text-xl font-bold text-center">MATHEMATICS</h3>
+                        <p class="text-sm opacity-90 text-center mt-2">Matematik yang mudah</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Story List -->
+            <div id="storyList" class="hidden">
+                <div class="flex items-center justify-between mb-6">
+                    <button onclick="showCategories(currentLevel)" class="bg-gray-500 text-white px-4 py-2 rounded-lg hover:bg-gray-600 transition-colors">
+                        ← Kembali
+                    </button>
+                    <h2 id="storyListTitle" class="text-3xl font-bold text-gray-800"></h2>
+                    <div></div>
+                </div>
+                
+                <div id="storyCards" class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <!-- Story cards will be populated here -->
+                </div>
+            </div>
+
+            <!-- Story Reader -->
+            <div id="storyReader" class="hidden">
+                <div class="flex items-center justify-between mb-6">
+                    <button onclick="showStories(currentCategory)" class="bg-gray-500 text-white px-4 py-2 rounded-lg hover:bg-gray-600 transition-colors">
+                        ← Kembali ke Senarai
+                    </button>
+                    <h2 id="storyTitle" class="text-3xl font-bold text-gray-800"></h2>
+                    <div></div>
+                </div>
+                
+                <div class="bg-gradient-to-br from-yellow-50 to-orange-50 p-8 rounded-2xl">
+                    <div id="storyContent" class="prose prose-lg max-w-none">
+                        <!-- Story content will be populated here -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let currentLevel = '';
+        let currentCategory = '';
+        
+        const storyData = {
+            junior: {
+                science: [
+                    { 
+                        title: "Pelangi Dalam Gelas", 
+                        emoji: "🌈",
+                        steps: "<div class='mb-6'><h3 class='text-2xl font-bold text-blue-600 mb-4'>🧪 Eksperimen Pelangi Dalam Gelas</h3><div class='bg-blue-50 p-4 rounded-lg mb-4'><b>Bahan-bahan:</b><ul class='list-disc list-inside ml-4 mt-2'><li>Gelas tinggi lutsinar</li><li>Madu</li><li>Sirap</li><li>Sabun pinggan</li><li>Air berwarna</li><li>Minyak masak</li></ul></div><div class='bg-green-50 p-4 rounded-lg mb-4'><b>Jom cuba:</b><ol class='list-decimal list-inside ml-4 mt-2'><li>Tuang madu perlahan-lahan ke dalam gelas.</li><li>Kemudian, tuang sabun pinggan.</li><li>Selepas itu, tuang air berwarna.</li><li>Akhir sekali, tuang minyak masak.</li><li>Lihat! Anda ada pelangi berlapis-lapis!</li></ol></div><div class='bg-yellow-50 p-4 rounded-lg'><p><b>🤔 Kenapa jadi macam tu?</b><br>Setiap cecair ada 'berat' yang berbeza. Yang paling berat seperti madu akan duduk di bawah, dan yang paling ringan seperti minyak akan terapung di atas.</p></div></div>", 
+                        riasec: "<b>🔍 Suka Menyiasat (Investigative)</b>: Kamu suka memerhati dan ingin tahu kenapa sesuatu terjadi.", 
+                        mi: "🧠 Pandai Logik, 👁️ Pandai Lihat Ruang.", 
+                        careers: "👩‍🔬 Ahli Sains Makanan, 🧪 Ahli Kimia, 🌊 Pakar Oseanografi (kaji lapisan laut).", 
+                        panduanKaunselor: "Gunakan aktiviti ini untuk meneroka konsep 'sifat tersembunyi'. Bincangkan dengan murid bagaimana sesuatu yang nampak bercampur (seperti air laut) sebenarnya mempunyai lapisan dan sifat yang berbeza. Kaitkan dengan personaliti murid: 'Kadang-kadang kita pun ada lapisan berbeza, kan? Ada masa kita gembira, ada masa kita sedih.' Ini membantu membina kesedaran kendiri." 
+                    },
+                    { 
+                        title: "Taman Mini Ajaib", 
+                        emoji: "🌱",
+                        steps: "<div class='mb-6'><h3 class='text-2xl font-bold text-green-600 mb-4'>🏡 Taman Mini Ajaib</h3><div class='bg-blue-50 p-4 rounded-lg mb-4'><b>Bahan-bahan:</b><ul class='list-disc list-inside ml-4 mt-2'><li>Botol plastik besar</li><li>Batu kecil</li><li>Tanah</li><li>Tumbuhan kecil (macam rumput)</li></ul></div><div class='bg-green-50 p-4 rounded-lg mb-4'><b>Jom cuba:</b><ol class='list-decimal list-inside ml-4 mt-2'><li>Minta orang dewasa potong botol kepada dua.</li><li>Di bahagian bawah botol, letak batu-batu kecil.</li><li>Kemudian, masukkan tanah dan tanam tumbuhan kecil anda.</li><li>Sembur sedikit air.</li><li>Tutup semula dengan bahagian atas botol dan lekatkan.</li><li>Letak di tempat bercahaya.</li></ol></div><div class='bg-yellow-50 p-4 rounded-lg'><p><b>🤔 Kenapa jadi macam tu?</b><br>Anda telah membina sebuah rumah untuk tumbuhan! Di dalamnya ada 'hujan mini'. Air akan naik ke atas dan turun semula, jadi pokok boleh minum air setiap hari.</p></div></div>", 
+                        riasec: "<b>🌿 Suka Alam Semula Jadi (Realistic)</b>: Kamu suka menanam dan menjaga tumbuhan.", 
+                        mi: "🌱 Pandai Alam, 👁️ Pandai Lihat Ruang.", 
+                        careers: "🌿 Ahli Botani, 🌍 Saintis Alam Sekitar, 🏞️ Arkitek Landskap.", 
+                        panduanKaunselor: "Aktiviti ini adalah metafora untuk 'tanggungjawab' dan 'penjagaan'. Bincangkan kepentingan menjaga sesuatu yang hidup. Tanya: 'Apa yang diperlukan oleh tumbuhan ini untuk hidup? Apa pula yang kamu perlukan untuk membesar dengan sihat?' Kaitkan dengan penjagaan diri dan matlamat masa depan." 
+                    },
+                    { 
+                        title: "Bunga Kertas Kembang", 
+                        emoji: "🌸",
+                        steps: "<div class='mb-6'><h3 class='text-2xl font-bold text-pink-600 mb-4'>🌸 Bunga Kertas Kembang</h3><div class='bg-blue-50 p-4 rounded-lg mb-4'><b>Bahan-bahan:</b><ul class='list-disc list-inside ml-4 mt-2'><li>Kertas</li><li>Pensel warna</li><li>Gunting</li><li>Satu besen berisi air</li></ul></div><div class='bg-green-50 p-4 rounded-lg mb-4'><b>Jom cuba:</b><ol class='list-decimal list-inside ml-4 mt-2'><li>Lukis dan warnakan gambar bunga.</li><li>Gunting gambar bunga itu.</li><li>Lipat kelopak bunga ke arah tengah.</li><li>Letakkan bunga kertas di atas air.</li><li>Tunggu dan lihat! Bunga akan kembang dengan sendirinya! Ajaib!</li></ol></div><div class='bg-yellow-50 p-4 rounded-lg'><p><b>🤔 Kenapa jadi macam tu?</b><br>Kertas suka 'minum' air. Apabila kertas basah, ia jadi berat dan terbuka semula. Macam bunga yang kembang di waktu pagi!</p></div></div>", 
+                        riasec: "<b>🎨 Suka Seni (Artistic)</b>: Kamu kreatif dan suka melukis.", 
+                        mi: "🎨 Pandai Seni, 🌱 Pandai Alam.", 
+                        careers: "🎨 Artis Saintifik, ✏️ Pereka Corak, 🧪 Jurutera Bahan (kaji sifat kertas).", 
+                        panduanKaunselor: "Gunakan untuk meneroka tema 'transformasi' atau 'perubahan'. Bunga yang kuncup menjadi kembang. Bincangkan perubahan yang murid alami (cth: dari Tahun 1 ke Tahun 2). 'Perubahan mana yang seronok? Perubahan mana yang menakutkan?' Aktiviti ini boleh menjadi pemula perbualan tentang daya tahan (resilience)." 
+                    },
+                    { 
+                        title: "Hidung atau Lidah?", 
+                        emoji: "👃",
+                        steps: "<div class='mb-6'><h3 class='text-2xl font-bold text-orange-600 mb-4'>👃 Hidung atau Lidah?</h3><div class='bg-blue-50 p-4 rounded-lg mb-4'><b>Bahan-bahan:</b><ul class='list-disc list-inside ml-4 mt-2'><li>Potongan kecil epal dan kentang</li><li>Kain penutup mata</li></ul></div><div class='bg-green-50 p-4 rounded-lg mb-4'><b>Jom cuba:</b><ol class='list-decimal list-inside ml-4 mt-2'><li>Tutup mata kawan anda.</li><li>Minta dia picit hidung dan rasa sepotong epal. Tanya dia, 'ini apa?'.</li><li>Kemudian, suruh dia rasa kentang pula (masih picit hidung).</li><li>Sekarang, suruh dia rasa sekali lagi tanpa picit hidung. Adakah dia boleh teka dengan betul?</li></ol></div><div class='bg-yellow-50 p-4 rounded-lg'><p><b>🤔 Kenapa jadi macam tu?</b><br>Lidah kita merasa masin, manis, masam dan pahit. Tapi hidung kita yang 'memberitahu' otak rasa sebenar makanan! Hidung dan lidah bekerjasama.</p></div></div>", 
+                        riasec: "<b>🔍 Suka Menyiasat (Investigative)</b>: Kamu suka membuat eksperimen ke atas kawan-kawan!", 
+                        mi: "👥 Pandai Bergaul, 🧠 Pandai Fikir.", 
+                        careers: "👨‍⚕️ Doktor (pakar ENT), 👨‍🍳 Chef Eksekutif, 🧪 Penganalisis Deria Rasa.", 
+                        panduanKaunselor: "Fokus pada tema 'kerjasama' dan 'persepsi'. Bincangkan bagaimana deria kita bekerjasama untuk memberi kita gambaran penuh. Kaitkan dengan kerja kumpulan: 'Kenapa penting untuk kita bekerjasama dengan kawan-kawan? Apa jadi kalau satu deria (atau seorang kawan) tak berfungsi?' Ini mengajar tentang kepentingan setiap peranan dalam satu pasukan." 
+                    }
+                ],
+                technology: [
+                    { 
+                        title: "Telefon Cawan", 
+                        emoji: "📞",
+                        steps: "<b>Bahan-bahan:</b><ul class='list-disc list-inside ml-4'><li>Dua cawan kertas</li><li>Benang panjang</li></ul><b>Jom cuba:</b><br><ol class='list-decimal list-inside ml-4'><li>Minta orang dewasa tebuk lubang kecil di bawah setiap cawan.</li><li>Masukkan benang melalui lubang dan ikat supaya tidak tercabut.</li><li>Beri satu cawan kepada kawan. Berjalan jauh sehingga benang menjadi tegang.</li><li>Seorang bercakap di dalam cawan, seorang lagi mendengar. Anda boleh dengar tak?</li></ol><br><p><b>Kenapa jadi macam tu?</b> Suara anda membuat benang bergetar. Getaran itu bergerak melalui benang ke cawan kawan anda, dan telinganya dapat mendengar getaran itu sebagai bunyi.</p>", 
+                        riasec: "<b>Suka Membina (Realistic)</b>: Kamu suka membuat alatan sendiri.", 
+                        mi: "Pandai Bergaul, Pandai Muzik.", 
+                        careers: "Jurutera Telekomunikasi, Penyampai Radio, Pakar Terapi Pertuturan.", 
+                        panduanKaunselor: "Fokus pada 'kemahiran mendengar' dan 'komunikasi yang jelas'. Selepas bermain, minta murid bincangkan: 'Adakah sukar untuk mendengar? Kenapa? Apa yang anda buat supaya kawan anda faham?' Gunakan ini sebagai latihan untuk mendengar secara aktif dan empati." 
+                    },
+                    { 
+                        title: "Penapis Air Bersih", 
+                        emoji: "💧",
+                        steps: "<b>Bahan-bahan:</b><ul class='list-disc list-inside ml-4'><li>Botol plastik, gunting</li><li>Kapas, pasir, batu kecil</li><li>Air kotor (campur sedikit tanah dalam air)</li></ul><b>Jom cuba:</b><br><ol class='list-decimal list-inside ml-4'><li>Minta orang dewasa potong botol kepada dua.</li><li>Terbalikkan bahagian atas botol dan masukkan ke dalam bahagian bawah.</li><li>Letak kapas di muncung botol.</li><li>Kemudian masukkan lapisan pasir.</li><li>Akhir sekali, letak lapisan batu kecil.</li><li>Tuang air kotor perlahan-lahan. Lihat air yang keluar! Lebih jernih kan?</li></ol><br><p><b>Kenapa jadi macam tu?</b> Setiap lapisan menapis kotoran yang berbeza saiz. Ini cara mudah untuk meniru sistem penapisan air sebenar.</p>", 
+                        riasec: "<b>Suka Menyiasat (Investigative)</b>: Kamu suka menyelesaikan masalah seperti 'bagaimana nak bersihkan air?'.", 
+                        mi: "Pandai Alam, Pandai Logik.", 
+                        careers: "Jurutera Awam (Air), Pakar Kualiti Air, Aktivis Alam Sekitar.", 
+                        panduanKaunselor: "Gunakan sebagai metafora untuk 'menyelesaikan masalah' atau 'menapis perkara negatif'. Bincangkan bagaimana penapis ini membuang kotoran. Kaitkan dengan emosi: 'Bagaimana kita boleh menapis fikiran yang tidak baik atau kata-kata negatif daripada kawan?' Ini membantu mengajar kemahiran daya tindak (coping skills)." 
+                    },
+                    { 
+                        title: "Dakwat Halimunan", 
+                        emoji: "🕵️",
+                        steps: "<div class='mb-6'><h3 class='text-2xl font-bold text-purple-600 mb-4'>🕵️ Dakwat Halimunan</h3><div class='bg-blue-50 p-4 rounded-lg mb-4'><b>Bahan-bahan:</b><ul class='list-disc list-inside ml-4 mt-2'><li>Jus lemon atau limau</li><li>Putik kapas (cotton bud), kertas putih</li></ul></div><div class='bg-green-50 p-4 rounded-lg mb-4'><b>Jom cuba:</b><ol class='list-decimal list-inside ml-4 mt-2'><li>Celup putik kapas dalam jus lemon.</li><li>Tulis mesej rahsia di atas kertas.</li><li>Biarkan ia kering. Tulisan akan hilang!</li><li>Untuk baca, minta orang dewasa panaskan kertas dengan seterika atau pengering rambut.</li><li>Mesej rahsia akan muncul!</li></ol></div><div class='bg-yellow-50 p-4 rounded-lg'><p><b>🤔 Kenapa jadi macam tu?</b><br>Jus lemon akan menjadi perang bila dipanaskan. Ia seperti helah ejen perisik!</p></div></div>", 
+                        riasec: "<b>🔍 Suka Menyiasat (Investigative)</b>: Kamu suka benda-benda rahsia dan teka-teki.", 
+                        mi: "🧠 Pandai Logik.", 
+                        careers: "🔍 Pakar Forensik, 🕵️ Ejen Perisikan, 📜 Sejarawan (kaji dokumen lama).", 
+                        panduanKaunselor: "Gunakan sebagai alat untuk membincangkan tentang 'rahsia' dan 'kepercayaan'. Tanya murid: 'Apakah jenis rahsia yang baik untuk disimpan? Apakah rahsia yang perlu kita beritahu kepada orang dewasa?' Ini boleh membuka perbualan tentang keselamatan peribadi dan buli siber." 
+                    },
+                    { 
+                        title: "Lampu Menyala!", 
+                        emoji: "💡",
+                        steps: "<div class='mb-6'><h3 class='text-2xl font-bold text-yellow-600 mb-4'>💡 Lampu Menyala!</h3><div class='bg-blue-50 p-4 rounded-lg mb-4'><b>Bahan-bahan:</b><ul class='list-disc list-inside ml-4 mt-2'><li>Sebiji bateri, sebiji mentol kecil</li><li>Kerajang aluminium (aluminium foil)</li></ul></div><div class='bg-green-50 p-4 rounded-lg mb-4'><b>Jom cuba:</b><ol class='list-decimal list-inside ml-4 mt-2'><li>Minta orang dewasa untuk bantu.</li><li>Gunting dua jalur kerajang aluminium.</li><li>Pegang satu jalur di bahagian bawah (negatif) bateri dan sentuhkan hujungnya pada sisi mentol.</li><li>Pegang jalur kedua di bahagian atas (positif) bateri dan sentuhkan hujungnya pada tapak mentol.</li><li>Lampu akan menyala!</li></ol></div><div class='bg-yellow-50 p-4 rounded-lg'><p><b>🤔 Kenapa jadi macam tu?</b><br>Anda telah membuat satu 'jalan' untuk elektrik bergerak dari bateri ke mentol dan kembali semula. Ini dipanggil litar elektrik.</p></div></div>", 
+                        riasec: "<b>🏗️ Suka Membina (Realistic)</b>: Kamu suka mencuba dan melihat bagaimana sesuatu berfungsi.", 
+                        mi: "🧠 Pandai Logik, 🔧 Pandai Guna Tangan.", 
+                        careers: "⚡ Jurutera Elektrik, ✈️ Mekanik Kapal Terbang, 💡 Pereka Lampu Pentas.", 
+                        panduanKaunselor: "Aktiviti ini melambangkan 'hubungan' dan 'komunikasi'. Terangkan bahawa litar hanya berfungsi jika ada sambungan yang lengkap. Kaitkan dengan persahabatan: 'Apa yang berlaku pada litar (persahabatan) jika ada satu sambungan yang terputus?' Ini boleh digunakan untuk kaunseling kelompok tentang komunikasi." 
+                    }
+                ],
+                engineering: [
+                    { 
+                        title: "Payung Terjun Mainan", 
+                        emoji: "🪂",
+                        steps: "<div class='mb-6'><h3 class='text-2xl font-bold text-blue-600 mb-4'>🪂 Payung Terjun Mainan</h3><div class='bg-blue-50 p-4 rounded-lg mb-4'><b>Bahan-bahan:</b><ul class='list-disc list-inside ml-4 mt-2'><li>Beg plastik, benang, gunting</li><li>Pita pelekat</li><li>Patung mainan kecil</li></ul></div><div class='bg-green-50 p-4 rounded-lg mb-4'><b>Jom cuba:</b><ol class='list-decimal list-inside ml-4 mt-2'><li>Gunting beg plastik menjadi bentuk segi empat sama besar.</li><li>Ikat benang pada setiap empat bucu beg plastik.</li><li>Ikat semua hujung benang pada patung mainan.</li><li>Naik atas kerusi (hati-hati!) dan jatuhkan.</li><li>Lihat mainan anda turun perlahan-lahan. Selamat mendarat!</li></ol></div><div class='bg-yellow-50 p-4 rounded-lg'><p><b>🤔 Kenapa jadi macam tu?</b><br>Payung terjun memerangkap udara di bawahnya. Udara itu melambatkan kejatuhan, macam brek angin.</p></div></div>", 
+                        riasec: "<b>🏗️ Suka Mereka Cipta (Realistic)</b>: Kamu suka membuat sesuatu untuk menyelesaikan masalah.", 
+                        mi: "🔧 Pandai Guna Tangan, 👁️ Pandai Lihat Ruang.", 
+                        careers: "🛡️ Jurutera Keselamatan, 🪂 Pereka Payung Terjun, 🚀 Angkasawan (kapsul mendarat).", 
+                        panduanKaunselor: "Fokus pada tema 'keselamatan' dan 'mengambil risiko yang terancang'. Bincangkan kenapa payung terjun penting. Kaitkan dengan kehidupan: 'Dalam situasi apa kita perlu 'memperlahankan diri' dan berfikir sebelum bertindak?' Ini mengajar tentang kawalan impuls." 
+                    },
+                    { 
+                        title: "Bot Tanah Liat", 
+                        emoji: "⛵",
+                        steps: "<div class='mb-6'><h3 class='text-2xl font-bold text-cyan-600 mb-4'>⛵ Bot Tanah Liat</h3><div class='bg-blue-50 p-4 rounded-lg mb-4'><b>Bahan-bahan:</b><ul class='list-disc list-inside ml-4 mt-2'><li>Seketul tanah liat (plastisin)</li><li>Besen berisi air</li><li>Guli atau batu kecil</li></ul></div><div class='bg-green-50 p-4 rounded-lg mb-4'><b>Jom cuba:</b><ol class='list-decimal list-inside ml-4 mt-2'><li>Bulatkan tanah liat dan letak dalam air. Ia tenggelam.</li><li>Ambil semula dan bentukkannya seperti mangkuk atau perahu.</li><li>Letak semula di atas air. Sekarang ia terapung!</li><li>Cuba letak guli satu per satu. Berapa banyak bot anda boleh angkut?</li></ol></div><div class='bg-yellow-50 p-4 rounded-lg'><p><b>🤔 Kenapa jadi macam tu?</b><br>Bentuk bot memerangkap udara dan menolak lebih banyak air. Sebab itulah kapal besar yang diperbuat daripada besi boleh terapung!</p></div></div>", 
+                        riasec: "<b>🏗️ Suka Membina (Realistic)</b>: Kamu suka mengubah bentuk benda dan mengujinya.", 
+                        mi: "🔧 Pandai Guna Tangan, 🧠 Pandai Logik.", 
+                        careers: "🚢 Arkitek Kapal, ⚓ Jurutera Marin, 🎨 Pereka Produk.", 
+                        panduanKaunselor: "Gunakan sebagai pelajaran tentang 'kebolehan menyesuaikan diri' dan 'berfikir di luar kotak'. Bola tanah liat tenggelam, tetapi dengan mengubah bentuknya, ia boleh terapung. Bincangkan: 'Apabila kamu menghadapi masalah, adakah cara lain untuk melihatnya? Bolehkah kita mengubah 'bentuk' masalah itu?' Ini menggalakkan pemikiran kreatif dalam menyelesaikan masalah." 
+                    },
+                    { 
+                        title: "Jambatan Kertas Kuat", 
+                        emoji: "📄",
+                        steps: "<div class='mb-6'><h3 class='text-2xl font-bold text-orange-600 mb-4'>📄 Jambatan Kertas Kuat</h3><div class='bg-blue-50 p-4 rounded-lg mb-4'><b>Bahan-bahan:</b><ul class='list-disc list-inside ml-4 mt-2'><li>Sekeping kertas A4</li><li>Dua buah buku sama tebal</li><li>Duit syiling</li></ul></div><div class='bg-green-50 p-4 rounded-lg mb-4'><b>Jom cuba:</b><ol class='list-decimal list-inside ml-4 mt-2'><li>Letak dua buku dengan jarak sedikit.</li><li>Letak kertas di atasnya untuk jadi jambatan. Berapa banyak syiling boleh ditampung?</li><li>Sekarang, lipat kertas itu seperti kipas.</li><li>Letak semula di atas buku. Cuba letak syiling lagi. Mesti boleh tahan lebih banyak!</li></ol></div><div class='bg-yellow-50 p-4 rounded-lg'><p><b>🤔 Kenapa jadi macam tu?</b><br>Bentuk yang berlipat-lipat adalah lebih kuat daripada yang rata. Sebab itu bumbung rumah selalunya beralun!</p></div></div>", 
+                        riasec: "<b>🏗️ Suka Membina (Realistic)</b>: Kamu suka mereka cipta dan menguji kekuatan.", 
+                        mi: "🧠 Pandai Logik, 🔧 Pandai Guna Tangan.", 
+                        careers: "🏗️ Jurutera Struktur, 🏢 Arkitek, 🎭 Pereka Set Pentas.", 
+                        panduanKaunselor: "Jadikan ini sebagai pelajaran tentang 'kekuatan dalaman' dan 'sokongan'. Bincangkan kenapa bentuk yang berlipat lebih kuat. Kaitkan dengan diri murid: 'Apa yang membuatkan kamu rasa kuat? Siapa yang menjadi sistem sokongan kamu (seperti buku)?' Ini membantu murid mengenal pasti sumber kekuatan mereka." 
+                    },
+                    { 
+                        title: "Roket Belon Laju", 
+                        emoji: "🚀",
+                        steps: "<div class='mb-6'><h3 class='text-2xl font-bold text-red-600 mb-4'>🚀 Roket Belon Laju</h3><div class='bg-blue-50 p-4 rounded-lg mb-4'><b>Bahan-bahan:</b><ul class='list-disc list-inside ml-4 mt-2'><li>Belon, penyedut minuman (straw)</li><li>Benang panjang, pita pelekat</li></ul></div><div class='bg-green-50 p-4 rounded-lg mb-4'><b>Jom cuba:</b><ol class='list-decimal list-inside ml-4 mt-2'><li>Masukkan benang melalui straw.</li><li>Ikat hujung benang pada dua kerusi.</li><li>Tiup belon tapi jangan ikat. Kepit dengan jari.</li><li>Lekatkan belon pada straw.</li><li>Lepaskan belon! Fuhhh! Luncurnya laju!</li></ol></div><div class='bg-yellow-50 p-4 rounded-lg'><p><b>🤔 Kenapa jadi macam tu?</b><br>Angin yang keluar ke belakang menolak roket belon ke hadapan. Roket sebenar pun guna cara yang sama!</p></div></div>", 
+                        riasec: "<b>🏗️ Suka Membina (Realistic)</b>: Kamu suka melihat benda bergerak laju.", 
+                        mi: "🔧 Pandai Guna Badan, 👁️ Pandai Lihat Ruang.", 
+                        careers: "🚀 Saintis Roket, ✈️ Jurutera Aeroangkasa, 🛩️ Juruterbang Pejuang.", 
+                        panduanKaunselor: "Gunakan untuk membincangkan konsep 'matlamat' dan 'motivasi'. Roket perlu ada 'tujahan' untuk bergerak. Tanya murid: 'Apa 'tujahan' atau pendorong kamu untuk datang ke sekolah setiap hari? Apa matlamat yang kamu nak capai?'" 
+                    }
+                ],
+                mathematics: [
+                    { 
+                        title: "Memburu Bentuk", 
+                        emoji: "🔍",
+                        steps: "<b>Bahan-bahan:</b><ul class='list-disc list-inside ml-4'><li>Kertas dan pensel</li><li>Mata yang tajam!</li></ul><b>Jom cuba:</b><br><ol class='list-decimal list-inside ml-4'><li>Jalan-jalan di dalam rumah atau kelas.</li><li>Cari objek yang berbentuk bulat, segi empat sama, segi tiga, dan segi empat tepat.</li><li>Lukis objek yang anda jumpa dan labelkan bentuknya.</li><li>Siapa dapat cari paling banyak?</li></ol><br><p><b>Kenapa buat macam ni?</b> Matematik ada di mana-mana! Aktiviti ini membantu kita nampak bentuk-bentuk geometri yang ada di sekeliling kita setiap hari.</p>", 
+                        riasec: "<b>Suka Peraturan (Conventional)</b>: Kamu suka mengkategorikan benda.", 
+                        mi: "Pandai Lihat Ruang, Pandai Logik.", 
+                        careers: "Pereka Grafik, Juruukur Tanah, Pereka Bandar.", 
+                        panduanKaunselor: "Jadikan ini aktiviti 'mencari corak dalam kehidupan'. Bincangkan bagaimana bentuk-bentuk ini ada di mana-mana. Kaitkan dengan rutin harian: 'Apakah 'bentuk' atau corak dalam hari kamu? (Bangun, pergi sekolah, balik rumah). Kenapa rutin itu penting?' Ini membantu murid menghargai struktur dan keteraturan." 
+                    },
+                    { 
+                        title: "Corak Mozek Kertas", 
+                        emoji: "🎨",
+                        steps: "<b>Bahan-bahan:</b><ul class='list-disc list-inside ml-4'><li>Kertas warna, gunting, gam</li><li>Kertas lukisan</li></ul><b>Jom cuba:</b><br><ol class='list-decimal list-inside ml-4'><li>Gunting kertas warna menjadi banyak bentuk yang sama, contohnya segi empat sama kecil.</li><li>Ambil kertas lukisan.</li><li>Tampal bentuk-bentuk tadi bersebelahan tanpa ada ruang kosong di antaranya.</li><li>Cipta corak yang cantik dan berulang-ulang.</li></ol><br><p><b>Kenapa buat macam ni?</b> Anda sedang membuat 'teselasi', iaitu corak yang berulang-ulang seperti jubin di lantai bilik air. Ia mengajar tentang corak dan geometri.</p>", 
+                        riasec: "<b>Suka Seni (Artistic)</b>: Kamu suka menyusun benda menjadi corak yang cantik.", 
+                        mi: "Pandai Seni, Pandai Lihat Ruang.", 
+                        careers: "Pereka Tekstil, Artis Mozek, Ahli Matematik.", 
+                        panduanKaunselor: "Gunakan untuk membincangkan tentang 'keharmonian' dan 'bagaimana bahagian-bahagian kecil membentuk sesuatu yang besar dan cantik'. Kaitkan dengan komuniti sekolah: 'Setiap daripada kamu adalah seperti sekeping mozek. Apabila kita bekerjasama, kita membentuk sebuah sekolah yang hebat.' Ini sesuai untuk aktiviti kaunseling kelompok." 
+                    },
+                    { 
+                        title: "Carta Gula-gula", 
+                        emoji: "📊",
+                        steps: "<b>Bahan-bahan:</b><ul class='list-disc list-inside ml-4'><li>Sebungkus gula-gula berwarna-warni</li><li>Kertas dan pensel warna</li></ul><b>Jom cuba:</b><br><ol class='list-decimal list-inside ml-4'><li>Asingkan gula-gula mengikut warna.</li><li>Kira berapa banyak gula-gula bagi setiap warna.</li><li>Di atas kertas, lukis satu bar untuk setiap warna. Kalau ada 5 gula-gula merah, buat bar setinggi 5 kotak.</li><li>Warnakan bar mengikut warna gula-gula.</li><li>Carta anda sudah siap! Warna apa yang paling banyak?</li></ol><br><p><b>Kenapa buat macam ni?</b> Ini cara mudah untuk menunjukkan data. Anda sedang belajar menjadi seorang penganalisis data, iaitu orang yang pandai membaca maklumat daripada nombor.</p>", 
+                        riasec: "<b>Suka Susun Atur (Conventional)</b>: Kamu suka mengira dan menyusun maklumat.", 
+                        mi: "Pandai Logik, Pandai Nombor.", 
+                        careers: "Penganalisis Penyelidikan Pasaran, Ahli Statistik, Perancang Inventori.", 
+                        panduanKaunselor: "Gunakan aktiviti ini untuk mengajar tentang 'membuat pilihan berdasarkan data'. Selepas carta siap, tanya: 'Jika kamu seorang pekedai, gula-gula warna apa yang kamu akan beli lebih banyak? Kenapa?' Kaitkan dengan membuat keputusan dalam hidup: 'Bagaimana kita boleh kumpul 'data' atau maklumat sebelum buat keputusan penting?'" 
+                    },
+                    { 
+                        title: "Seni Simetri", 
+                        emoji: "🎨",
+                        steps: "<b>Bahan-bahan:</b><ul class='list-disc list-inside ml-4'><li>Kertas, cat air atau pewarna makanan</li></ul><b>Jom cuba:</b><br><ol class='list-decimal list-inside ml-4'><li>Lipat kertas kepada dua bahagian, kemudian buka semula.</li><li>Titiskan beberapa warna cat air di sebelah garisan lipatan sahaja.</li><li>Lipat semula kertas tadi dan tekan perlahan-lahan.</li><li>Buka semula kertas. Lihat! Anda dapat corak yang sama di kedua-dua belah. Cantik!</li></ol><br><p><b>Kenapa jadi macam tu?</b> Ini dipanggil simetri. Macam rama-rama, sayap kiri dan kanannya adalah sama. Badan kita pun simetri juga!</p>", 
+                        riasec: "<b>Suka Seni (Artistic)</b>: Kamu suka bermain dengan warna dan corak.", 
+                        mi: "Pandai Seni, Pandai Lihat Ruang.", 
+                        careers: "Pereka Fesyen, Ahli Biologi (kaji simetri haiwan), Pereka Logo.", 
+                        panduanKaunselor: "Gunakan untuk meneroka konsep 'keseimbangan'. Bincangkan kenapa simetri nampak cantik dan seimbang. Kaitkan dengan kehidupan: 'Apa yang perlu ada dalam hidup kamu supaya rasa seimbang? (Masa bermain, masa belajar, masa rehat).' Ini membantu memperkenalkan konsep keseimbangan hidup." 
+                    }
+                ]
+            },
+            intermediate: {
+                science: [
+                    { 
+                        title: "Volkano Meletus!", 
+                        emoji: "🌋",
+                        steps: "<b>Bahan-bahan:</b><ul class='list-disc list-inside ml-4'><li>Botol plastik kecil</li><li>Tanah liat atau pasir</li><li>Cuka, soda bikarbonat</li><li>Sedikit sabun pinggan dan pewarna merah</li></ul><b>Jom cuba:</b><br><ol class='list-decimal list-inside ml-4'><li>Letak botol di tengah-tengah dulang.</li><li>Bina bentuk gunung di sekeliling botol guna tanah liat atau pasir.</li><li>Masukkan 2 sudu soda bikarbonat, beberapa titis pewarna merah dan sedikit sabun ke dalam botol.</li><li>Tuang cuka ke dalam botol dan... lari! Volkano anda akan meletus dengan lava berbuih!</li></ol><br><p><b>Kenapa jadi macam tu?</b> Apabila cuka (asid) dan soda bikarbonat (alkali) bercampur, ia menghasilkan gas karbon dioksida. Gas inilah yang menolak buih-buih sabun keluar, sama seperti gunung berapi sebenar!</p>", 
+                        riasec: "<b>Suka Menyiasat (Investigative)</b>: Kamu suka melihat tindak balas yang hebat.", 
+                        mi: "Pandai Logik, Pandai Alam.", 
+                        careers: "Ahli Volkanologi, Ahli Geokimia, Pakar Kesan Khas Filem.", 
+                        panduanKaunselor: "Gunakan sebagai cara untuk membincangkan 'pengurusan emosi', terutamanya kemarahan. Letusan volkano adalah tiba-tiba dan kuat. Bincangkan: 'Apa yang membuatkan kamu rasa macam nak 'meletus'? Apa cara yang lebih baik untuk melepaskan perasaan itu dengan selamat?'" 
+                    },
+                    { 
+                        title: "Telur Kenyal", 
+                        emoji: "🥚",
+                        steps: "<b>Bahan-bahan:</b><ul class='list-disc list-inside ml-4'><li>Sebiji telur mentah</li><li>Cuka makan</li><li>Gelas atau balang</li></ul><b>Jom cuba:</b><br><ol class='list-decimal list-inside ml-4'><li>Letakkan telur perlahan-lahan ke dalam gelas.</li><li>Tuang cuka sehingga telur tenggelam sepenuhnya.</li><li>Anda akan nampak buih-buih kecil pada kulit telur.</li><li>Biarkan selama 24-48 jam.</li><li>Keluarkan telur dan basuh perlahan-lahan. Kulitnya sudah hilang! Telur itu kini kenyal macam bola getah. Cuba lambung perlahan-lahan.</li></ol><br><p><b>Kenapa jadi macam tu?</b> Kulit telur diperbuat daripada kalsium karbonat. Cuka adalah asid yang akan melarutkan kulit telur itu, meninggalkan hanya lapisan membran yang lembut di dalam.</p>", 
+                        riasec: "<b>Suka Menyiasat (Investigative)</b>: Kamu seorang yang sabar dan suka memerhati perubahan.", 
+                        mi: "Pandai Logik, Pandai Fikir.", 
+                        careers: "Saintis Bahan, Pembangun Produk Makanan, Pakar Pemakanan.", 
+                        panduanKaunselor: "Aktiviti ini menunjukkan bagaimana sesuatu yang keras (kulit telur) boleh dilunakkan dan diubah. Gunakan sebagai metafora untuk 'sikap terbuka' dan 'fleksibiliti'. Bincangkan: 'Kadang-kadang kita ada idea yang keras macam kulit telur. Apa akan jadi kalau kita cuba 'lembutkan' fikiran kita dan dengar pendapat orang lain?'" 
+                    },
+                    { 
+                        title: "Bina Elektromagnet", 
+                        emoji: "🧲",
+                        steps: "<b>Bahan-bahan:</b><ul class='list-disc list-inside ml-4'><li>Paku besi besar</li><li>Wayar kuprum bertebat (ada salut plastik)</li><li>Bateri saiz D</li><li>Klip kertas</li></ul><b>Jom cuba:</b><br><ol class='list-decimal list-inside ml-4'><li>Lilitkan wayar kuprum di sekeliling paku dengan kemas. Tinggalkan sedikit wayar di kedua-dua hujung.</li><li>Minta orang dewasa kikis sedikit plastik di hujung wayar.</li><li>Sentuhkan satu hujung wayar pada bahagian atas bateri, dan satu lagi pada bahagian bawah. (Awas: Wayar mungkin jadi sedikit panas).</li><li>Dekatkan paku pada klip kertas. Ia dah jadi magnet!</li></ol><br><p><b>Kenapa jadi macam tu?</b> Elektrik yang mengalir melalui wayar menghasilkan medan magnet. Paku besi menjadikan medan magnet itu lebih kuat. Inilah asas motor elektrik!</p>", 
+                        riasec: "<b>Suka Membina (Realistic)</b>: Kamu suka memasang dan menguji alatan.", 
+                        mi: "Pandai Guna Tangan, Pandai Logik.", 
+                        careers: "Jurutera Elektromagnet, Pereka Motor Elektrik, Ahli Fizik Perubatan (MRI).", 
+                        panduanKaunselor: "Fokus pada konsep 'kuasa tersembunyi'. Elektrik tidak kelihatan, tetapi ia boleh menghasilkan kuasa magnet yang kuat. Kaitkan dengan potensi diri murid: 'Setiap orang ada bakat atau 'kuasa' tersembunyi. Bagaimana cara kita nak 'aktifkan' bakat itu?'" 
+                    },
+                    { 
+                        title: "Telur Terapung di Tengah", 
+                        emoji: "🥚",
+                        steps: "<b>Bahan-bahan:</b><ul class='list-disc list-inside ml-4'><li>Telur mentah, 2 gelas tinggi</li><li>Garam, sudu, air</li></ul><b>Jom cuba:</b><br><ol class='list-decimal list-inside ml-4'><li>Isi satu gelas dengan air paip dan masukkan telur. Ia tenggelam.</li><li>Di gelas kedua, larutkan 5-6 sudu garam dalam separuh air.</li><li>Masukkan telur. Ia akan terapung!</li><li>Sekarang, tuang air paip biasa dengan SANGAT PERLAHAN ke dalam gelas air garam.</li><li>Jika anda buat dengan betul, telur itu akan terapung di tengah-tengah air!</li></ol><br><p><b>Kenapa jadi macam tu?</b> Air garam lebih berat (tumpat) daripada air biasa. Dengan menambah air biasa, anda mencipta satu lapisan air yang kurang berat di atas, membolehkan telur terapung di antara dua lapisan itu.</p>", 
+                        riasec: "<b>Suka Menyiasat (Investigative)</b>: Kamu teliti dan suka melihat hasil yang tepat.", 
+                        mi: "Pandai Logik, Pandai Fikir.", 
+                        careers: "Ahli Oseanografi, Jurutera Bawah Air, Pemandu Kapal Selam.", 
+                        panduanKaunselor: "Ini adalah visualisasi yang hebat untuk konsep 'mencari keseimbangan'. Telur itu tidak tenggelam dan tidak terapung sepenuhnya. Bincangkan tentang mencari keseimbangan dalam hidup, contohnya antara kerja sekolah dan bermain, atau antara masa dengan kawan dan keluarga." 
+                    }
+                ],
+                technology: [
+                    { 
+                        title: "Animasi Stop-Motion", 
+                        emoji: "🎬",
+                        steps: "<b>Bahan-bahan:</b><ul class='list-disc list-inside ml-4'><li>Telefon pintar atau tablet</li><li>Aplikasi percuma 'Stop Motion Studio'</li><li>Patung mainan atau tanah liat</li></ul><b>Jom cuba:</b><br><ol class='list-decimal list-inside ml-4'><li>Buka aplikasi dan mulakan projek baru.</li><li>Letak mainan anda dan ambil gambar pertama.</li><li>Gerakkan mainan itu SIKIT sahaja.</li><li>Ambil gambar kedua.</li><li>Ulang langkah 2 & 3 banyak kali.</li><li>Tekan butang 'play'. Lihat! Mainan anda bergerak sendiri!</li></ol><br><p><b>Kenapa jadi macam tu?</b> Otak kita menyambungkan gambar-gambar yang pantas bertukar menjadi satu pergerakan. Inilah cara filem kartun dan animasi dibuat!</p>", 
+                        riasec: "<b>Suka Seni (Artistic)</b>: Kamu suka bercerita melalui gambar.", 
+                        mi: "Pandai Seni, Pandai Lihat Ruang.", 
+                        careers: "Animator, Pengarah Filem, Pereka Grafik Gerakan.", 
+                        panduanKaunselor: "Mengajar asas animasi dan kepentingan kesabaran. Setiap pergerakan kecil adalah penting. Kaitkan proses ini dengan usaha mencapai cita-cita: 'Untuk mencapai sesuatu yang besar (animasi yang lancar), kita perlu lakukan banyak langkah kecil dengan sabar'." 
+                    },
+                    { 
+                        title: "Buat E-Kad Ucapan", 
+                        emoji: "💌",
+                        steps: "<b>Bahan-bahan:</b><ul class='list-disc list-inside ml-4'><li>Komputer atau tablet dengan internet</li><li>Laman web reka bentuk percuma seperti Canva</li></ul><b>Jom cuba:</b><br><ol class='list-decimal list-inside ml-4'><li>Layari canva.com dan daftar akaun percuma (minta bantuan ibu bapa).</li><li>Cari templat 'Kad Ucapan'.</li><li>Pilih satu reka bentuk yang anda suka.</li><li>Tukar perkataan, warna, dan gambar. Tambah gambar anda sendiri!</li><li>Anda boleh tambah pelekat (sticker) yang comel dan bergerak.</li><li>Simpan dan hantar kepada kawan-kawan melalui emel atau WhatsApp.</li></ol><br><p><b>Kenapa buat macam ni?</b> Anda sedang belajar asas reka bentuk grafik. Ini adalah kemahiran penting untuk membuat poster, pembentangan, dan kandungan media sosial yang cantik.</p>", 
+                        riasec: "<b>Suka Seni (Artistic)</b>: Kamu suka mereka cipta sesuatu yang cantik di komputer.", 
+                        mi: "Pandai Seni, Pandai Lihat Ruang.", 
+                        careers: "Pereka Grafik, Pakar Media Sosial, Pereka UI/UX.", 
+                        panduanKaunselor: "Memperkenalkan alat reka bentuk digital yang sangat berguna. Gunakan ini untuk sesi tentang ekspresi diri: 'Bagaimana kamu boleh gunakan warna dan gambar untuk menunjukkan perasaan kamu dalam kad ini?'" 
+                    },
+                    { 
+                        title: "Rakam Cerita Audio", 
+                        emoji: "🎙️",
+                        steps: "<b>Bahan-bahan:</b><ul class='list-disc list-inside ml-4'><li>Telefon pintar yang ada aplikasi 'Voice Recorder'</li></ul><b>Jom cuba:</b><br><ol class='list-decimal list-inside ml-4'><li>Fikirkan satu cerita pendek yang ringkas.</li><li>Berlatih membaca cerita itu dengan suara yang berbeza untuk setiap watak.</li><li>Fikirkan kesan bunyi yang anda boleh buat sendiri. Contoh: ketuk meja untuk bunyi pintu, tiup untuk bunyi angin.</li><li>Tekan butang rakam dan mulakan penceritaan anda! Jangan lupa masukkan kesan bunyi.</li><li>Dengar semula hasil rakaman anda. Seronok kan?</li></ol><br><p><b>Kenapa buat macam ni?</b> Anda sedang belajar menjadi seorang jurutera audio atau penerbit 'podcast'. Mereka menggunakan suara dan bunyi untuk bercerita.</p>", 
+                        riasec: "<b>Suka Seni (Artistic)</b>: Kamu suka berlakon dengan suara dan bunyi.", 
+                        mi: "Pandai Muzik, Pandai Bahasa.", 
+                        careers: "Penerbit Radio, 'Podcaster', Pelakon Suara, Pereka Bunyi (Sound Designer).", 
+                        panduanKaunselor: "Aktiviti ini mengasah kemahiran bercerita dan keyakinan diri. Selepas rakaman, bincangkan: 'Apa perasaan kamu bila dengar suara sendiri? Apa yang kamu suka tentang cerita kamu?' Ini membina penerimaan kendiri." 
+                    },
+                    { 
+                        title: "Bina Kod QR Sendiri", 
+                        emoji: "📱",
+                        steps: "<b>Bahan-bahan:</b><ul class='list-disc list-inside ml-4'><li>Komputer atau telefon pintar dengan internet</li></ul><b>Jom cuba:</b><br><ol class='list-decimal list-inside ml-4'><li>Cari 'QR code generator' di Google. Pilih salah satu laman web percuma.</li><li>Pilih jenis maklumat yang ingin anda kongsi (cth: Teks).</li><li>Taip satu mesej rahsia untuk kawan anda.</li><li>Klik butang 'Generate'. Satu gambar kod QR akan muncul.</li><li>Simpan gambar itu.</li><li>Minta kawan anda imbas kod itu guna kamera telefon. Adakah dia dapat mesej rahsia anda?</li></ol><br><p><b>Kenapa jadi macam tu?</b> Kod QR menyimpan maklumat dalam bentuk corak hitam putih. Telefon kita pandai membaca corak ini dan menukarkannya semula kepada teks. Ia cara pantas untuk berkongsi maklumat!</p>", 
+                        riasec: "<b>Suka Peraturan (Conventional)</b>: Kamu suka cara yang cekap untuk berkongsi maklumat.", 
+                        mi: "Pandai Logik, Pandai Lihat Ruang.", 
+                        careers: "Pakar Pemasaran Digital, Pembangun Aplikasi Mudah Alih, Jurutera Logistik.", 
+                        panduanKaunselor: "Menunjukkan bagaimana maklumat digital boleh dihubungkan dengan dunia fizikal. Gunakan ini untuk membincangkan keselamatan dalam talian: 'Maklumat apa yang selamat untuk dikongsi dalam kod QR? Maklumat apa yang tidak?'" 
+                    }
+                ],
+                engineering: [
+                    { 
+                        title: "Menara Mi Sepaghetti", 
+                        emoji: "🍝",
+                        steps: "<b>Bahan-bahan:</b><ul class='list-disc list-inside ml-4'><li>20 batang mi spaghetti</li><li>Satu biji marshmallow</li><li>1 meter pita pelekat</li></ul><b>Jom cuba:</b><br><ol class='list-decimal list-inside ml-4'><li>Bina sebuah menara paling tinggi yang boleh berdiri sendiri guna bahan yang diberi.</li><li>Peraturan: Marshmallow mesti berada di puncak sekali!</li><li>Tips: Bentuk segi tiga adalah sangat kuat. Cuba buat tapak yang stabil.</li><li>Ukur ketinggian menara anda. Cabar kawan-kawan!</li></ol><br><p><b>Kenapa buat macam ni?</b> Ini adalah cabaran kejuruteraan sebenar! Jurutera perlu membina struktur yang tinggi dan kuat dengan bahan yang terhad. Anda sedang belajar menjadi seorang jurutera sivil.</p>", 
+                        riasec: "<b>Suka Membina (Realistic)</b>: Kamu suka cabaran dan mereka cipta.", 
+                        mi: "Pandai Guna Tangan, Pandai Bergaul.", 
+                        careers: "Jurutera Sivil, Arkitek, Pengurus Projek Pembinaan.", 
+                        panduanKaunselor: "Cabaran klasik yang mengajar tentang perancangan, kerjasama, dan daya tahan apabila menara runtuh. Bincangkan: 'Apa yang kamu pelajari bila menara kamu jatuh? Bagaimana kumpulan kamu bekerjasama untuk membaikinya?'" 
+                    },
+                    { 
+                        title: "Tangan Robotik Kadbod", 
+                        emoji: "🤖",
+                        steps: "<b>Bahan-bahan:</b><ul class='list-disc list-inside ml-4'><li>Kadbod tebal, penyedut minuman (straw)</li><li>Benang atau tali, gunting, pita pelekat</li></ul><b>Jom cuba:</b><br><ol class='list-decimal list-inside ml-4'><li>Lukis bentuk tangan anda di atas kadbod dan gunting.</li><li>Lipat setiap sendi jari.</li><li>Potong straw menjadi kepingan kecil dan lekatkan pada setiap ruas jari.</li><li>Masukkan seutas benang melalui semua straw pada satu jari. Ikat hujungnya di hujung jari.</li><li>Ulang untuk semua jari.</li><li>Tarik benang-benang di bahagian bawah. Jari-jari robotik akan bergerak!</li></ol><br><p><b>Kenapa jadi macam tu?</b> Benang itu berfungsi seperti tendon di dalam jari kita. Apabila ditarik, ia membuatkan jari membengkok. Ini adalah asas kepada robotik dan prostetik (tangan palsu).</p>", 
+                        riasec: "<b>Suka Membina (Realistic)</b>: Kamu suka meniru cara benda hidup berfungsi.", 
+                        mi: "Pandai Guna Tangan, Pandai Fikir.", 
+                        careers: "Jurutera Robotik, Pakar Prostetik, Pereka Animasi (animatronics).", 
+                        panduanKaunselor: "Satu cara yang hebat untuk belajar tentang anatomi dan kejuruteraan. Gunakan ini untuk meneroka tema empati: 'Bagaimana ciptaan seperti ini boleh membantu orang yang kehilangan tangan?'" 
+                    },
+                    { 
+                        title: "Kereta Belon", 
+                        emoji: "🚗",
+                        steps: "<b>Bahan-bahan:</b><ul class='list-disc list-inside ml-4'><li>Kotak kecil atau botol plastik</li><li>4 penutup botol, 2 lidi sate, 2 straw</li><li>Belon, pita pelekat</li></ul><b>Jom cuba:</b><br><ol class='list-decimal list-inside ml-4'><li>Buat roda dengan memasukkan lidi melalui straw yang dilekat di bawah kotak. Pasang penutup botol sebagai roda.</li><li>Tebuk satu lubang di atas kotak.</li><li>Masukkan hujung belon melalui lubang dan lekatkan straw pada muncung belon itu.</li><li>Tiup belon melalui straw. Tahan angin dengan jari.</li><li>Letak di atas lantai dan lepaskan. Kereta anda akan bergerak!</li></ol><br><p><b>Kenapa jadi macam tu?</b> Udara yang keluar dari belon menolak kereta ke hadapan. Ini dipanggil tujahan (thrust). Prinsip yang sama digunakan oleh jet dan roket!</p>", 
+                        riasec: "<b>Suka Membina (Realistic)</b>: Kamu suka membuat kenderaan sendiri.", 
+                        mi: "Pandai Guna Tangan, Pandai Lihat Ruang.", 
+                        careers: "Jurutera Automotif, Pereka Mainan, Jurutera Pendorongan (Propulsion).", 
+                        panduanKaunselor: "Mengajar tentang penukaran tenaga. Cabar murid untuk menambah baik rekaan mereka. Ini mengajar proses reka bentuk berulang (iterative design): 'Bagaimana kita boleh buat kereta ini bergerak lebih laju atau lebih lurus? Jom cuba baiki!'" 
+                    },
+                    { 
+                        title: "Kincir Angin Warna-Warni", 
+                        emoji: "🌪️",
+                        steps: "<b>Bahan-bahan:</b><ul class='list-disc list-inside ml-4'><li>Kertas tebal, pin tekan</li><li>Pensel yang ada pemadam di hujungnya</li></ul><b>Jom cuba:</b><br><ol class='list-decimal list-inside ml-4'><li>Lukis 'X' pada kertas segi empat sama.</li><li>Gunting di sepanjang garisan, tapi jangan sampai ke tengah.</li><li>Lipat setiap bucu selang-seli ke tengah.</li><li>Cucuk pin menembusi semua lapisan di tengah dan cucuk pada pemadam di hujung pensel.</li><li>Pastikan ia boleh berputar. Tiup atau bawa keluar.</li></ol><br><p><b>Kenapa jadi macam tu?</b> Angin menolak bilah kincir dan membuatnya berputar. Kincir angin besar digunakan untuk menghasilkan elektrik daripada kuasa angin!</p>", 
+                        riasec: "<b>Suka Seni (Artistic)</b>: Kamu suka membuat benda yang cantik dan berfungsi.", 
+                        mi: "Pandai Guna Tangan, Pandai Alam.", 
+                        careers: "Jurutera Tenaga Boleh Baharu, Pereka Turbin Angin, Ahli Meteorologi.", 
+                        panduanKaunselor: "Aktiviti klasik yang mengajar tentang tenaga angin. Gunakan sebagai pemula perbincangan tentang alam sekitar dan tenaga bersih: 'Selain angin, apa lagi sumber tenaga bersih yang ada?'" 
+                    }
+                ],
+                mathematics: [
+                    { 
+                        title: "Kod Rahsia Pengganti", 
+                        emoji: "🔐",
+                        steps: "<b>Bahan-bahan:</b><ul class='list-disc list-inside ml-4'><li>Kertas dan pensel</li></ul><b>Jom cuba:</b><br><ol class='list-decimal list-inside ml-4'><li>Ini kod rahsia mudah: A=1, B=2, C=3, dan seterusnya.</li><li>Tulis satu mesej rahsia menggunakan nombor. Contoh: 'SAYA' menjadi '19-1-25-1'.</li><li>Beri mesej berkod itu kepada kawan. Beri juga kunci kod (A=1, B=2...).</li><li>Bolehkah kawan anda selesaikannya?</li><li>Cuba cipta kod anda sendiri! Contoh: A=Z, B=Y...</li></ol><br><p><b>Kenapa buat macam ni?</b> Anda sedang belajar Kriptografi, iaitu sains membuat dan memecahkan kod. Ia menggunakan logik matematik untuk melindungi maklumat.</p>", 
+                        riasec: "<b>Suka Menyiasat (Investigative)</b>: Kamu suka menyelesaikan teka-teki dan kod rahsia.", 
+                        mi: "Pandai Logik, Pandai Nombor.", 
+                        careers: "Pakar Keselamatan Siber, Pengaturcara Komputer, Penganalisis Risikan.", 
+                        panduanKaunselor: "Memperkenalkan pemikiran logik dan algoritma. Bincangkan tentang kepentingan komunikasi yang jelas: 'Apa jadi kalau kunci kod kamu tidak jelas? Adakah kawan kamu boleh faham?' Ini mengajar tentang kepentingan memberi arahan yang tepat." 
+                    },
+                    { 
+                        title: "Ukur Pi (π) Guna Benang", 
+                        emoji: "🔢",
+                        steps: "<b>Bahan-bahan:</b><ul class='list-disc list-inside ml-4'><li>Objek bulat (cth: piring, tin, penutup botol)</li><li>Benang, pembaris, kalkulator</li></ul><b>Jom cuba:</b><br><ol class='list-decimal list-inside ml-4'><li>Ambil satu objek bulat. Lilit benang di sekelilingnya (ukur lilitan). Ukur panjang benang itu dengan pembaris.</li><li>Kemudian, ukur jarak lurus merentasi tengah bulatan (diameter).</li><li>Bahagikan (lilitan ÷ diameter). Catat jawapannya.</li><li>Ulang dengan objek bulat lain.</li><li>Anda akan dapati jawapannya sentiasa lebih kurang 3.14. Itulah nombor Pi!</li></ol><br><p><b>Kenapa jadi macam tu?</b> Pi ialah satu nombor istimewa dalam matematik yang menghubungkan lilitan dan diameter semua bulatan di dunia, tak kira besar atau kecil.</p>", 
+                        riasec: "<b>Suka Menyiasat (Investigative)</b>: Kamu suka membuat ukuran dan mencari corak.", 
+                        mi: "Pandai Nombor, Pandai Lihat Ruang.", 
+                        careers: "Ahli Matematik, Jurutera Mekanikal, Ahli Fizik.", 
+                        panduanKaunselor: "Eksperimen hebat yang membuktikan satu konsep matematik penting melalui pengukuran dunia sebenar. Gunakan ini untuk membincangkan tentang 'pemalar' dalam hidup: 'Seperti Pi yang sentiasa sama, apakah nilai-nilai murni (cth: jujur, baik hati) yang sentiasa penting dalam diri kita?'" 
+                    },
+                    { 
+                        title: "Belanjawan Kedai Mainan", 
+                        emoji: "🛍️",
+                        steps: "<b>Bahan-bahan:</b><ul class='list-disc list-inside ml-4'><li>Katalog mainan (dari surat khabar atau internet)</li><li>Kertas dan pensel</li></ul><b>Jom cuba:</b><br><ol class='list-decimal list-inside ml-4'><li>Bayangkan anda diberi RM100 untuk membeli-belah.</li><li>Lihat katalog mainan dan pilih barang yang anda mahu beli.</li><li>Tulis nama mainan dan harganya.</li><li>Jumlahkan harga semua mainan. Adakah ia lebih atau kurang daripada RM100?</li><li>Kira berapa baki duit anda. Cuba dapatkan baki yang paling sedikit!</li></ol><br><p><b>Kenapa buat macam ni?</b> Ini adalah latihan matematik dalam kehidupan sebenar! Anda belajar menguruskan wang, membuat anggaran, dan mengira jumlah dengan pantas.</p>", 
+                        riasec: "<b>Suka Peraturan (Conventional)</b>: Kamu suka merancang dan mengira.", 
+                        mi: "Pandai Nombor, Pandai Fikir.", 
+                        careers: "Penganalisis Kewangan, Usahawan, Perancang Bandar.", 
+                        panduanKaunselor: "Mengajar kemahiran kewangan asas dengan cara yang relevan. Gunakan ini untuk sesi penetapan matlamat: 'Jika RM100 ini adalah 'masa' kamu dalam sehari, bagaimana kamu akan 'belanjakannya' antara belajar, bermain, dan berehat?'" 
+                    },
+                    { 
+                        title: "Seni Koordinat", 
+                        emoji: "📍",
+                        steps: "<b>Bahan-bahan:</b><ul class='list-disc list-inside ml-4'><li>Kertas graf, pensel</li></ul><b>Jom cuba:</b><br><ol class='list-decimal list-inside ml-4'><li>Lukis paksi-x (melintang) dan paksi-y (menegak) pada kertas graf. Labelkan nombor.</li><li>Ikut senarai koordinat ini dan tandakan titik: (1,1), (5,1), (5,4), (3,6), (1,4), (1,1).</li><li>Sambungkan titik-titik mengikut urutan. Apakah bentuk yang anda dapat? (Sebuah rumah!)</li><li>Cuba cipta gambar anda sendiri dan tulis senarai koordinat untuk kawan anda teka.</li></ol><br><p><b>Kenapa buat macam ni?</b> Anda sedang belajar menggunakan graf koordinat, yang sangat penting dalam mereka bentuk permainan video, peta GPS, dan banyak lagi!</p>", 
+                        riasec: "<b>Suka Peraturan (Conventional)</b>: Kamu teliti dan suka mengikut arahan.", 
+                        mi: "Pandai Lihat Ruang, Pandai Nombor.", 
+                        careers: "Pereka Permainan Video, Juruukur Tanah, Animator Komputer.", 
+                        panduanKaunselor: "Cara yang menyeronokkan untuk memperkenalkan graf koordinat. Gunakan sebagai alat untuk membincangkan 'perancangan' dan 'mengikut arahan': 'Apa yang berlaku jika kamu tersilap satu titik? Penting tak untuk ikut arahan dengan betul untuk mencapai hasil yang diinginkan?'" 
+                    }
+                ]
+            },
+            senior: {
+                science: [
+                    { 
+                        title: "Bina Oven Solar", 
+                        emoji: "☀️",
+                        steps: "<b>Bahan-bahan:</b><ul class='list-disc list-inside ml-4'><li>Kotak piza atau kotak kasut</li><li>Kerajang aluminium (aluminium foil), plastik pembalut (cling wrap)</li><li>Kertas hitam, pita pelekat, gunting</li><li>Biskut dan coklat keping</li></ul><b>Jom cuba:</b><br><ol class='list-decimal list-inside ml-4'><li>Alaskan bahagian dalam kotak dengan kerajang aluminium.</li><li>Letakkan sekeping kertas hitam di dasarnya.</li><li>Minta orang dewasa potong 'tingkap' pada penutup kotak. Jangan potong habis, biarkan satu sisi bercantum.</li><li>Tampal kerajang aluminium pada bahagian dalam 'tingkap' itu.</li><li>Tutup lubang tingkap dengan plastik pembalut.</li><li>Letak biskut dan coklat di atas kertas hitam, tutup kotak, dan halakan ke arah matahari. Tunggu dan lihat coklat cair!</li></ol><br><p><b>Kenapa jadi macam tu?</b> Kerajang aluminium memantulkan cahaya matahari ke dalam kotak. Warna hitam menyerap haba, dan plastik memerangkap haba itu. Anda telah membina sebuah oven solar!</p>", 
+                        riasec: "<b>Suka Mereka Cipta (Realistic)</b>: Kamu suka membina sesuatu yang berguna.", 
+                        mi: "Pandai Alam, Pandai Guna Tangan.", 
+                        careers: "Jurutera Tenaga Boleh Baharu, Saintis Alam Sekitar, Pereka Produk Lestari.", 
+                        panduanKaunselor: "Gunakan sebagai pemula perbualan tentang 'masa depan' dan 'kelestarian'. Bincangkan isu perubahan iklim pada tahap yang mudah difahami. Kaitkan dengan peranan murid: 'Apakah satu 'langkah kecil' yang boleh kamu buat hari ini untuk menjaga bumi kita, sama seperti oven ini menggunakan kuasa matahari yang bersih?'" 
+                    },
+                    { 
+                        title: "Ekstrak DNA Strawberi", 
+                        emoji: "🧬",
+                        steps: "<b>Bahan-bahan:</b><ul class='list-disc list-inside ml-4'><li>Sebiji strawberi, beg plastik kedap udara</li><li>Sabun pencuci pinggan, garam</li><li>Alkohol gosok (simpan dalam peti sejuk)</li><li>Penapis kopi, cawan</li></ul><b>Jom cuba:</b><br><ol class='list-decimal list-inside ml-4'><li>Masukkan strawberi dalam beg plastik, tutup dan lenyekkan sehingga hancur.</li><li>Dalam cawan lain, campurkan 2 sudu teh sabun, 1 sudu teh garam dan 1/2 cawan air.</li><li>Masukkan 2 sudu teh campuran sabun ini ke dalam beg strawberi, gaul perlahan.</li><li>Tapis campuran strawberi ke dalam cawan yang bersih.</li><li>Tuang alkohol sejuk perlahan-lahan di tepi cawan. Jangan kacau!</li><li>Lihat! Benang-benang putih akan terapung. Itulah DNA strawberi!</li></ol><br><p><b>Kenapa jadi macam tu?</b> Sabun memecahkan dinding sel strawberi, dan garam membantu DNA berkumpul. DNA tidak larut dalam alkohol sejuk, jadi ia muncul sebagai gumpalan yang boleh kita lihat.</p>", 
+                        riasec: "<b>Suka Menyiasat (Investigative)</b>: Kamu teliti dan suka melihat perkara yang tersembunyi.", 
+                        mi: "Pandai Logik, Pandai Alam.", 
+                        careers: "Ahli Genetik, Saintis Forensik, Juruteknik Makmal Perubatan.", 
+                        panduanKaunselor: "Gunakan aktiviti ini untuk membincangkan tentang 'keunikan'. Terangkan bahawa DNA ialah 'kod arahan' yang menjadikan setiap hidupan unik. Tanya murid: 'Apakah 'kod' atau sifat unik yang ada pada diri kamu yang membuatkan kamu istimewa?'" 
+                    },
+                    { 
+                        title: "Kanta Pembesar Air", 
+                        emoji: "🔍",
+                        steps: "<b>Bahan-bahan:</b><ul class='list-disc list-inside ml-4'><li>Pembalut plastik (cling wrap), gelang getah</li><li>Balang kaca mulut lebar (cth: balang jem)</li><li>Air, penitis air (dropper)</li></ul><b>Jom cuba:</b><br><ol class='list-decimal list-inside ml-4'><li>Letakkan pembalut plastik di atas mulut balang. Pastikan ia tegang.</li><li>Gunakan gelang getah untuk mengikat pembalut plastik dengan ketat.</li><li>Tekan bahagian tengah plastik ke bawah sedikit untuk membuat lekukan kecil.</li><li>Letakkan sekeping kertas dengan tulisan kecil di dalam balang.</li><li>Gunakan penitis untuk meletakkan beberapa titis air ke dalam lekukan plastik tadi.</li><li>Lihat tulisan melalui titisan air. Ia nampak lebih besar!</li></ol><br><p><b>Kenapa jadi macam tu?</b> Bentuk melengkung titisan air membengkokkan cahaya, sama seperti kanta pembesar sebenar. Ini dipanggil pembiasan cahaya.</p>", 
+                        riasec: "<b>Suka Menyiasat (Investigative)</b>: Kamu suka mengubah cara kamu melihat sesuatu.", 
+                        mi: "Pandai Lihat Ruang, Pandai Logik.", 
+                        careers: "Pakar Optik, Jurugambar, Pereka Mikroskop.", 
+                        panduanKaunselor: "Gunakan untuk membincangkan 'perspektif'. Kanta air ini mengubah cara kita melihat tulisan. Tanya murid: 'Bagaimana kita boleh melihat satu masalah dari 'kanta' atau sudut pandangan yang berbeza? Adakah ia akan kelihatan berbeza?' Ini mengajar kemahiran menyelesaikan masalah." 
+                    }
+                ],
+                technology: [
+                    { 
+                        title: "Sistem Keselamatan Pintar", 
+                        emoji: "🔐",
+                        steps: "<div class='mb-6'><h3 class='text-2xl font-bold text-red-600 mb-4'>🔐 Sistem Keselamatan Pintar</h3><div class='bg-blue-50 p-4 rounded-lg mb-4'><b>Bahan-bahan:</b><ul class='list-disc list-inside ml-4 mt-2'><li>Sensor jarak (ultrasonic)</li><li>LED merah dan hijau</li><li>Buzzer kecil</li><li>Arduino atau microbit</li><li>Wayar dan breadboard</li></ul></div><div class='bg-green-50 p-4 rounded-lg mb-4'><b>Jom cuba:</b><ol class='list-decimal list-inside ml-4 mt-2'><li>Sambung sensor dengan microcontroller.</li><li>Program: jika ada objek dekat, LED merah menyala.</li><li>Jika tiada objek, LED hijau menyala.</li><li>Tambah buzzer untuk bunyi amaran.</li><li>Test dengan bergerak di hadapan sensor!</li></ol></div><div class='bg-yellow-50 p-4 rounded-lg'><p><b>🤔 Kenapa jadi macam tu?</b><br>Sensor hantar gelombang bunyi dan ukur masa ia balik. Komputer kira jarak dan buat keputusan - sama macam sistem keselamatan rumah sebenar!</p></div></div>", 
+                        riasec: "<b>💻 Suka Programming (Investigative)</b>: Kamu suka buat komputer ikut arahan kamu.", 
+                        mi: "🧠 Pandai Logik, 🔧 Pandai Badan-Kinestetik.", 
+                        careers: "🔐 Pakar Keselamatan Siber, 💻 Pengaturcara Sistem, 🏠 Jurutera IoT.", 
+                        panduanKaunselor: "Sistem keselamatan mengajar tentang 'perlindungan' dan 'kesedaran'. Bincangkan: 'Apa yang kamu nak lindungi dalam hidup? Macam mana nak jaga keselamatan diri dan orang tersayang?' Ini mengajar tentang tanggungjawab dan kepedulian." 
+                    }
+                ],
+                engineering: [
+                    { 
+                        title: "Jambatan Hidraulik", 
+                        emoji: "🌉",
+                        steps: "<div class='mb-6'><h3 class='text-2xl font-bold text-blue-600 mb-4'>🌉 Jambatan Hidraulik</h3><div class='bg-blue-50 p-4 rounded-lg mb-4'><b>Bahan-bahan:</b><ul class='list-disc list-inside ml-4 mt-2'><li>2 syringe besar</li><li>Tiub plastik panjang</li><li>Air berwarna</li><li>Kayu atau kardboard (untuk jambatan)</li><li>Engsel kecil</li></ul></div><div class='bg-green-50 p-4 rounded-lg mb-4'><b>Jom cuba:</b><ol class='list-decimal list-inside ml-4 mt-2'><li>Sambung dua syringe dengan tiub berisi air.</li><li>Buat jambatan boleh angkat dengan engsel.</li><li>Sambung satu syringe dengan jambatan.</li><li>Tekan syringe yang satu lagi.</li><li>Lihat jambatan naik turun dengan kuasa air!</li></ol></div><div class='bg-yellow-50 p-4 rounded-lg'><p><b>🤔 Kenapa jadi macam tu?</b><br>Tekanan air dalam tiub sama di kedua-dua hujung. Bila tekan satu syringe, tekanan pindah ke syringe lain dan angkat jambatan. Ini prinsip hidraulik!</p></div></div>", 
+                        riasec: "<b>🏗️ Suka Kejuruteraan (Realistic)</b>: Kamu suka buat sistem yang kompleks dan bergerak.", 
+                        mi: "👁️ Pandai Lihat Ruang, 🧠 Pandai Logik.", 
+                        careers: "🏗️ Jurutera Hidraulik, 🌉 Jurutera Struktur, 🚧 Jurutera Awam.", 
+                        panduanKaunselor: "Jambatan hidraulik mengajar tentang 'kerjasama' dan 'sistem sokongan'. Bincangkan: 'Siapa dalam hidup kamu yang macam 'hidraulik' - bila kamu tekan (minta tolong), dia angkat kamu? Macam mana kamu pula boleh jadi sokongan untuk orang lain?' Ini mengajar tentang hubungan timbal balik dan sokongan komuniti." 
+                    }
+                ],
+                mathematics: [
+                    { 
+                        title: "Syarikat Saham Junior", 
+                        emoji: "📈",
+                        steps: "<div class='mb-6'><h3 class='text-2xl font-bold text-green-600 mb-4'>📈 Syarikat Saham Junior</h3><div class='bg-blue-50 p-4 rounded-lg mb-4'><b>Bahan-bahan:</b><ul class='list-disc list-inside ml-4 mt-2'><li>Kertas graf</li><li>Kalkulator</li><li>Wang mainan (RM1000)</li><li>Senarai 'syarikat' (Apple, Google, dll)</li><li>Dadu (untuk simulasi naik turun harga)</li></ul></div><div class='bg-green-50 p-4 rounded-lg mb-4'><b>Jom cuba:</b><ol class='list-decimal list-inside ml-4 mt-2'><li>Pilih 3 'syarikat' untuk beli saham (RM100 setiap satu).</li><li>Setiap hari, lempar dadu untuk tentukan harga naik/turun.</li><li>Rekod harga dalam graf selama 2 minggu.</li><li>Kira untung/rugi setiap syarikat.</li><li>Buat keputusan: jual, beli lagi, atau tahan?</li></ol></div><div class='bg-yellow-50 p-4 rounded-lg'><p><b>🤔 Kenapa jadi macam tu?</b><br>Harga saham naik turun bergantung pada prestasi syarikat dan keadaan pasaran. Pelabur bijak kaji corak dan buat keputusan berdasarkan data!</p></div></div>", 
+                        riasec: "<b>💼 Suka Perniagaan (Enterprising)</b>: Kamu suka ambil risiko dan buat keputusan kewangan.", 
+                        mi: "🧠 Pandai Logik-Matematik, 👥 Pandai Interpersonal.", 
+                        careers: "📊 Penganalisis Saham, 💼 Penasihat Pelaburan, 🏢 Pengurus Portfolio.", 
+                        panduanKaunselor: "Saham mengajar tentang 'risiko' dan 'keputusan'. Bincangkan: 'Bila kamu pernah ambil risiko yang berbaloi? Macam mana kamu buat keputusan penting?' Ini mengajar tentang penilaian risiko dan membuat keputusan berinformasi." 
+                    }
+                ]
+            }
+        };
+
+        function showLevelSelection() {
+            document.getElementById('levelSelection').classList.remove('hidden');
+            document.getElementById('categorySelection').classList.add('hidden');
+            document.getElementById('storyList').classList.add('hidden');
+            document.getElementById('storyReader').classList.add('hidden');
+        }
+
+        function showCategories(level) {
+            currentLevel = level;
+            document.getElementById('levelSelection').classList.add('hidden');
+            document.getElementById('categorySelection').classList.remove('hidden');
+            document.getElementById('storyList').classList.add('hidden');
+            document.getElementById('storyReader').classList.add('hidden');
+            
+            const levelNames = {
+                'junior': 'STEM JUNIOR 🌱',
+                'intermediate': 'STEM INTERMEDIATE 🌟', 
+                'senior': 'STEM SENIOR 🏆'
+            };
+            
+            document.getElementById('categoryTitle').textContent = levelNames[level];
+        }
+
+        function showStories(category) {
+            currentCategory = category;
+            document.getElementById('categorySelection').classList.add('hidden');
+            document.getElementById('storyList').classList.remove('hidden');
+            document.getElementById('storyReader').classList.add('hidden');
+            
+            const categoryNames = {
+                'science': 'SCIENCE 🔬',
+                'technology': 'TECHNOLOGY 💻',
+                'engineering': 'ENGINEERING ⚙️',
+                'mathematics': 'MATHEMATICS 🔢'
+            };
+            
+            document.getElementById('storyListTitle').textContent = categoryNames[category];
+            
+            const stories = storyData[currentLevel][category] || [];
+            const storyCardsContainer = document.getElementById('storyCards');
+            
+            storyCardsContainer.innerHTML = '';
+            
+            stories.forEach((story, index) => {
+                const card = document.createElement('div');
+                card.className = 'story-card bg-gradient-to-br from-indigo-400 to-purple-500 text-white p-6 rounded-2xl shadow-lg';
+                card.onclick = () => showStory(index);
+                
+                card.innerHTML = `
+                    <div class="text-5xl mb-4 text-center">${story.emoji}</div>
+                    <h3 class="text-xl font-bold text-center mb-2">${story.title}</h3>
+                    <p class="text-sm opacity-90 text-center">Klik untuk baca cerita!</p>
+                `;
+                
+                storyCardsContainer.appendChild(card);
+            });
+        }
+
+        function showStory(storyIndex) {
+            document.getElementById('storyList').classList.add('hidden');
+            document.getElementById('storyReader').classList.remove('hidden');
+            
+            const story = storyData[currentLevel][currentCategory][storyIndex];
+            
+            document.getElementById('storyTitle').textContent = story.title;
+            
+            document.getElementById('storyContent').innerHTML = `
+                ${story.steps}
+                
+                <div class="grid md:grid-cols-2 gap-6 mt-8">
+                    <div class="bg-purple-50 p-6 rounded-xl">
+                        <h4 class="text-xl font-bold text-purple-700 mb-3">🎯 Personaliti RIASEC</h4>
+                        <p class="text-gray-700">${story.riasec}</p>
+                    </div>
+                    
+                    <div class="bg-blue-50 p-6 rounded-xl">
+                        <h4 class="text-xl font-bold text-blue-700 mb-3">🧠 Kecerdasan Pelbagai</h4>
+                        <p class="text-gray-700">${story.mi}</p>
+                    </div>
+                    
+                    <div class="bg-green-50 p-6 rounded-xl">
+                        <h4 class="text-xl font-bold text-green-700 mb-3">💼 Kerjaya Masa Depan</h4>
+                        <p class="text-gray-700">${story.careers}</p>
+                    </div>
+                    
+                    <div class="bg-orange-50 p-6 rounded-xl">
+                        <h4 class="text-xl font-bold text-orange-700 mb-3">👨‍🏫 Panduan Kaunselor</h4>
+                        <p class="text-gray-700 text-sm">${story.panduanKaunselor}</p>
+                    </div>
+                </div>
+                
+                <div class="text-center mt-8">
+                    <button onclick="showStories(currentCategory)" class="bg-gradient-to-r from-blue-500 to-purple-600 text-white px-8 py-3 rounded-full font-bold hover:shadow-lg transition-all duration-300 transform hover:scale-105">
+                        📚 Baca Cerita Lain
+                    </button>
+                </div>
+            `;
+        }
+
+        // Initialize the app
+        showLevelSelection();
+    </script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'97e40effb3ce1ec5',t:'MTc1NzcyODkwNi4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
